@@ -18,17 +18,17 @@ function ProductManagement() {
       Quagga.init(
         {
           inputStream: {
-            name: 'Live',
-            type: 'LiveStream',
+            name: "Live",
+            type: "LiveStream",
             target: scannerRef.current,
             constraints: {
-              width: 480,
-              height: 320,
-              facingMode: 'environment',
+              width: 600,
+              height: 600,
+              facingMode: "environment"
             },
           },
           decoder: {
-            readers: ['ean_reader', 'ean_8_reader', 'code_128_reader', 'code_39_reader', 'code_39_vin_reader', 'codabar_reader', 'upc_reader', 'upc_e_reader', 'i2of5_reader'],
+            readers: ['ean_reader', 'ean_8_reader', 'code_128_reader'],
           },
         },
         (err) => {
@@ -66,7 +66,7 @@ function ProductManagement() {
   };
 
   const handleBarcodeDetected = (result) => {
-    if (result.codeResult.code) {
+    if (result && result.codeResult) {
       setNewProduct({ ...newProduct, barcode: result.codeResult.code });
       setScanning(false);
     }
@@ -128,7 +128,7 @@ function ProductManagement() {
 
       {scanning && (
         <div className="mb-4">
-          <div ref={scannerRef} className="w-full max-w-md mx-auto"></div>
+          <div ref={scannerRef} style={{ width: 600, height: 600 }} className="mx-auto"></div>
         </div>
       )}
 
